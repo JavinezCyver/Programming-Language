@@ -1,0 +1,44 @@
+import random
+
+# Parameters
+total_spaces = 10 
+simulation_time = 600  
+car_arrival_rate = (10, 20)  
+parking_duration_range = (30, 120)  
+
+# Initialize variables
+parking_lot = [None] * total_spaces  # Parking lot with 10 spaces
+car_leave_times = []  # Track when cars leave
+total_parked_cars = 0
+total_parking_time = 0
+
+# Simulate parking lot operation
+current_time = 0
+while current_time < simulation_time:
+    # Check if any cars leave at this time
+    car_leave_times = [leave_time for leave_time in car_leave_times if leave_time > current_time]
+    parking_lot = [None if leave_time <= current_time else car for car, leave_time in zip(parking_lot, car_leave_times)]
+    
+    # Car arrival
+    arrival_interval = random.randint(*car_arrival_rate)
+    current_time += arrival_interval
+    if current_time >= simulation_time:
+        break
+    
+   
+    if None in parking_lot:
+        # Park the car
+        parking_duration = random.randint(*parking_duration_range)
+        leave_time = current_time + parking_duration
+        parking_lot[parking_lot.index(None)] = leave_time
+        car_leave_times.append(leave_time)
+        
+        total_parked_cars += 1
+        total_parking_time += parking_duration
+
+# Calculate metrics
+average_parking_time = total_parking_time / total_parked_cars if total_parked_cars else 0
+
+# Output results
+print(f"Total Cars Parked: {total_parked_cars}")
+print(f"Average Parking Duration: {average_parking_time:.2f} minutes")
