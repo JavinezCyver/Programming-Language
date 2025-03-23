@@ -1,0 +1,41 @@
+<?php
+echo "Enter first number: ";
+$num1 = trim(fgets(STDIN));
+
+echo "Enter operator ( +, -, *, /): ";
+$operator = trim(fgets(STDIN));
+
+echo "enter 2nd number: ";
+$num2 = trim(fgets(STDIN));
+
+$num1 =floatval($num1);
+$num2 =floatval($num2);
+
+switch ($operator) {
+    case "+":
+    $result = $num1 + $num2;
+    break;
+    
+    case "-":
+    $result = $num1 - $num2;
+    break;
+    
+    case "*":
+    $result = $num1 * $num2;
+    break;
+    
+    case "/":
+        if ($sum2 != 0){
+            $result = $num1 / $num2;
+        }else{
+            echo "Error! Division by zero is not allowed. \n";
+            exit;
+        }
+            break;
+        default:
+            echo "Invalid operator! please use +,-,* or /.\n";
+            exit;
+        }  
+        echo "Result: $num1 $operator
+        $num2 = $result\n";
+        ?>
